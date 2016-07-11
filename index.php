@@ -95,6 +95,11 @@
 
     <div class="main-container">
         <div class="container">
+            
+            <?php
+                $hoy = date("j F, Y, g:i a");
+                echo $hoy;
+            ?>
             <div class="row">
                 <div class="col-sm-12 page-content col-thin-right">
                     <div class="inner-box category-content">
