@@ -35,6 +35,61 @@
         };
     </script>
     <script src="assets/js/pace.min.js"></script>
+    
+    <!-- Código PhP  -->
+    <?php  
+        //Declarar variable con toda la frase
+        //Recortar variable y que muestre 80 primeros caracteres
+        //mostrar variable y 3 puntos susopensivos
+        $frase = "Un viaje entretenido y seguro, no me gusta correr. Además, pararemos a mitad de camino para tomar una rica tostada de sobrasada, y luego, directos a Huelva.";
+        $fraseCorta= substr($frase,0,80);
+        $fraseCorta= $fraseCorta . "...";
+        
+        //Creación de un array para los trayectos
+        $trayectos= array(
+            0=>array(
+                'name' => "Antonio Pérez",
+                'viaje' => "Córdoba a Sevilla",
+                'direc' => "Calle Poeta Paredes, 25",
+                'hora' =>"9:00",
+                'precio' =>"10€",
+                'plazas' => "3 plazas"
+            ),
+            1=>array(
+                'name' => "Antonio García",
+                'viaje' => "Córdoba a Huelva",
+                'direc' => "Calle Gloria Fuertes, 2",
+                'hora' =>"13:00",
+                'precio' =>"15€",
+                'plazas' => "2 plazas"
+            ),
+            2=>array(
+                'name' => "Benito Gálvez",
+                'viaje' => "Córdoba a Badajoz",
+                'direc' => "Avd. Guerrita, 33",
+                'hora' =>"19:00",
+                'precio' =>"18€",
+                'plazas' => "4 plazas"
+            ),
+            3=>array(
+                'name' => "Braulio López",
+                'viaje' => "Córdoba a Cádiz",
+                'direc' => "Avd. Victoria, 45",
+                'hora' =>"8:00",
+                'precio' =>"13€",
+                'plazas' => "1 plazas"
+            ),
+            4=>array(
+                'name' => "Steleo Kontos",
+                'viaje' => "Córdoba a Vitoria",
+                'direc' => "Calle Tras la puerta, 2",
+                'hora' =>"10:00",
+                'precio' =>"20€",
+                'plazas' => "2 plazas"
+            )
+        );
+    ?>
+    
 </head>
 <body>
 <div id="wrapper">
@@ -120,57 +175,51 @@
                             <div class="col-lg-12  box-title no-border">
                                 <div class="inner">
                                     <h2><span> Trayectos </span> publicados
-                                        <small> 1 resultado encontrado</small>
-
-
+                                        <small> <?php echo count($trayectos); ?> resultados encontrados</small>
                                     </h2>
                                 </div>
                             </div>
+                        
+                        <!-- Bucle PhP para mostrar los trayectos -->    
+                        <?php for($i=0;$i<count($trayectos);$i++){ 
                             
-                        <div class="adds-wrapper jobs-list">
-                            <div class="item-list job-item">
-
-
-                                <div class="col-sm-1  col-xs-2 no-padding photobox">
-                                    <div class="add-image"><a href=""><img class="thumbnail no-margin"
-                                                                           src="https://addons.cdn.mozilla.net/user-media/userpics/0/0/45.png?modified=1447324257"
-                                                                           alt="Avatar de Usuario"></a></div>
-                                </div>
-                                <!--/.photobox-->
-                                <div class="col-sm-10  col-xs-10  add-desc-box">
-                                    <div class="add-details jobs-item">
-                                        <h5 class="company-title"><a href="">Antonio Pérez</a></h5>
-                                        <h4 class="job-title"><a href="job-details.html"> Córdoba a Huelva </a></h4>
-                                        <span class="info-row">  <span class="item-location"><i
-                                                class="fa fa-map-marker"></i> Calle Poeta Paredes, 25 </span> <span class="date"><i
-                                                class=" icon-clock"> </i>9:00</span><span class=" salary">	<i
-                                                class=" icon-money"> </i> 10€</span></span>
-
-                                        <div class="jobs-desc">
-                                            Un viaje entretenido y seguro, no me gusta correr. Además, pararemos a mitad de camino para tomar una rica tostada de sobraasada, y luego, directos a Huelva.
-                                        </div>
-
-
-                                        <div class="job-actions">
-                                            <ul class="list-unstyled list-inline">
-                                                <li>
-                                                    <span class="save-job">
-                                                        <span class="fa fa-users"></span>
-                                                        3 plazas
-                                                    </span>
-                                                </li>
-                                            </ul>
-                                        </div>
-
-
+                        ?>
+                            <div class="adds-wrapper jobs-list">
+                                <div class="item-list job-item">
+                                    <div class="col-sm-1  col-xs-2 no-padding photobox">
+                                        <div class="add-image"><a href=""><img class="thumbnail no-margin" src="https://addons.cdn.mozilla.net/user-media/userpics/0/0/45.png?modified=1447324257" alt="Avatar de Usuario"></a></div>
                                     </div>
+                                    <!--/.photobox-->
+                                    <div class="col-sm-10  col-xs-10  add-desc-box">
+                                        <div class="add-details jobs-item">
+                                            <h5 class="company-title"><a href=""><?php echo $trayectos[$i]['name']; ?></a></h5>
+                                            <h4 class="job-title"><a href="job-details.html"> <?php echo $trayectos[$i]['viaje']; ?> </a></h4>
+                                            <span class="info-row">
+                                                <span class="item-location"><i class="fa fa-map-marker"></i><?php echo " " . $trayectos[$i]['direc']; ?></span>
+                                                <span class="date"><i class=" icon-clock"> </i><?php echo $trayectos[$i]['hora']; ?></span>
+                                                <span class=" salary"><i class=" icon-money"> </i> <?php echo $trayectos[$i]['precio']; ?></span>
+                                            </span>
+                                            <div class="jobs-desc">
+                                                <?php echo "$fraseCorta"; ?>
+                                            </div>
+                                            <div class="job-actions">
+                                                <ul class="list-unstyled list-inline">
+                                                    <li>
+                                                        <span class="save-job">
+                                                            <span class="fa fa-users"></span><?php echo " " . $trayectos[$i]['plazas']; ?>
+                                                        </span>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/.add-desc-box-->
+    
+                                    <!--/.add-desc-box-->
                                 </div>
-                                <!--/.add-desc-box-->
-
-                                <!--/.add-desc-box-->
+                                <!--/.job-item-->
                             </div>
-                            <!--/.job-item-->
-                        </div>
+                       <?php } ?> <!--Find e bucle for-->
                     </div>    
                 </div>    
                 
