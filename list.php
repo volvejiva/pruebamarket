@@ -37,7 +37,13 @@
     <script src="assets/js/pace.min.js"></script>
     
     <!-- Código PhP  -->
-    <?php  
+    <?php
+    
+    date_default_timezone_set('Europe/Madrid');
+    $hoy = date("j F, Y, g:i a");
+    $year= date("Y");
+    $creditos= " Desarrollado por Antonio JiVa";
+    
         //Declarar variable con toda la frase
         //Recortar variable y que muestre 80 primeros caracteres
         //mostrar variable y 3 puntos susopensivos
@@ -219,7 +225,7 @@
                                 </div>
                                 <!--/.job-item-->
                             </div>
-                       <?php } ?> <!--Find e bucle for-->
+                       <?php } ?> <!--Fin de bucle for-->
                     </div>    
                 </div>    
                 
@@ -231,7 +237,7 @@
     <div class="footer" id="footer">
         <div class="container">
             <ul class=" pull-right navbar-link footer-nav">
-                <li> &copy; 2016 - development by Sopinet Software</li>
+                <li> &copy; <?php echo $year. " - ". $creditos;?></li>
             </ul>
         </div>
     </div>
