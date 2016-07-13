@@ -51,47 +51,61 @@
         $fraseCorta= substr($frase,0,80);
         $fraseCorta= $fraseCorta . "...";
         
+        //Variable de Ciudad e origen pasada por get
+        $cOrigen = $_GET['country'];
+        $notrayecto = "No se han encontrado trayectos con estos parámetros, Lo sentimos";
+        
         //Creación de un array para los trayectos
         $trayectos= array(
             0=>array(
                 'name' => "Antonio Pérez",
-                'viaje' => "Córdoba a Sevilla",
+                'origen' => "Córdoba",
+                'destino' => "Sevilla",
                 'direc' => "Calle Poeta Paredes, 25",
                 'hora' =>"9:00",
                 'precio' =>"10€",
-                'plazas' => "3 plazas"
+                'plazas' => "3 plazas",
+                'avatar' => "images/users/6.jpg"
             ),
             1=>array(
                 'name' => "Antonio García",
-                'viaje' => "Córdoba a Huelva",
+                'origen' => "Córdoba",
+                'destino' => "Huelva",
                 'direc' => "Calle Gloria Fuertes, 2",
                 'hora' =>"13:00",
                 'precio' =>"15€",
-                'plazas' => "2 plazas"
+                'plazas' => "2 plazas",
+                'avatar' => "images/users/2.jpg"
             ),
             2=>array(
                 'name' => "Benito Gálvez",
-                'viaje' => "Córdoba a Badajoz",
+                'origen' => "Córdoba",
+                'destino' => "Badajoz",
                 'direc' => "Avd. Guerrita, 33",
                 'hora' =>"19:00",
                 'precio' =>"18€",
-                'plazas' => "4 plazas"
+                'plazas' => "4 plazas",
+                'avatar' => "images/users/3.jpg"
             ),
             3=>array(
                 'name' => "Braulio López",
-                'viaje' => "Córdoba a Cádiz",
+                'origen' => "Jaen",
+                'destino' => "Cádiz",
                 'direc' => "Avd. Victoria, 45",
                 'hora' =>"8:00",
                 'precio' =>"13€",
-                'plazas' => "1 plazas"
+                'plazas' => "1 plazas",
+                'avatar' => "images/users/7.jpg"
             ),
             4=>array(
                 'name' => "Steleo Kontos",
-                'viaje' => "Córdoba a Vitoria",
+                'origen' => "Ciudad Real",
+                'destino' => "Vitoria",
                 'direc' => "Calle Tras la puerta, 2",
                 'hora' =>"10:00",
                 'precio' =>"20€",
-                'plazas' => "2 plazas"
+                'plazas' => "2 plazas",
+                'avatar' => "images/users/5.jpg"
             )
         );
     ?>
@@ -118,21 +132,27 @@
     </div>
     <!-- /.header -->
 
-    <div class="search-row-wrapper"
-         style="background-image: url(images/jobs/ibg.jpg); background-size: cover; background-position: center center;">
-        <div class="container text-center">
-            <div class="col-sm-3 col-sm-offset-3">
-                <select class="form-control" name="category" id="search-category">
-                    <option selected="selected" value="">Localidad</option>
-                    <option value="111">Huelva</option>
-                    <option value="111">Cordoba</option>
-                    <option value="111">Sevilla</option>
-                </select>    
+    <div class="search-row-wrapper" style="background-image: url(images/jobs/ibg.jpg); background-size: cover; background-position: center center;">
+        <form name="search" action="list.php" method="GET">
+            <div class="container text-center">
+                <div class="col-sm-3 col-sm-offset-3">
+                    <select class="form-control" name="country" id="search-category">
+                        <option selected="selected" value="">Localidad</option>
+                        <option value="Huelva">Huelva</option>
+                        <option value="Córdoba">Córdoba</option>
+                        <option value="Sevilla">Sevilla</option>
+                        <option value="Jaen">Jaen</option>
+                        <option value="Cádiz">Cádiz</option>
+                        <option value="Ciudad Real">Ciudad Real</option>
+                        <option value="Vitoria">Vitoria</option>
+                        <option value="Badajoz">Badajoz</option>
+                    </select>    
+                </div>
+                <div class="col-sm-3">
+                    <button class="btn btn-block btn-primary"> Buscar trayectos <i class="fa fa-search"></i></button>
+                </div>
             </div>
-            <div class="col-sm-3">
-                <button class="btn btn-block btn-primary"> Buscar trayectos <i class="fa fa-search"></i></button>
-            </div>
-        </div>
+         </form>
     </div>    
 
     <div class="main-container inner-page">
@@ -176,30 +196,42 @@
                 <div class="col-sm-9 page-content col-thin-left">
                     <div class="category-list">
                         <div class="tab-box clearfix ">
+                            
+                            <!-- Bucle para determinar los trayectos encontrados -->
+                            <?php
+                                $count=0;
+                                for($i=0;$i<count($trayectos);$i++){
+                                    if($cOrigen == $trayectos[$i]['destino'] || $cOrigen == $trayectos[$i]['origen']){
+                                        $count++;
+                                    }
+                                }
+                            ?> <!-- Fin de bucle -->
 
                             <!-- Nav tabs -->
                             <div class="col-lg-12  box-title no-border">
                                 <div class="inner">
                                     <h2><span> Trayectos </span> publicados
-                                        <small> <?php echo count($trayectos); ?> resultados encontrados</small>
+                                        <small> <?php echo $count; ?> resultados encontrados</small>
                                     </h2>
                                 </div>
                             </div>
                         
-                        <!-- Bucle PhP para mostrar los trayectos -->    
-                        <?php for($i=0;$i<count($trayectos);$i++){ 
-                            
+                        <!-- Bucle PhP para mostrar los trayectos -->   
+                        <?php
+                            if($count != 0){
+                            for($i=0;$i<count($trayectos);$i++){
+                                if($cOrigen == $trayectos[$i]['origen'] || $cOrigen == $trayectos[$i]['destino']){
                         ?>
                             <div class="adds-wrapper jobs-list">
                                 <div class="item-list job-item">
                                     <div class="col-sm-1  col-xs-2 no-padding photobox">
-                                        <div class="add-image"><a href=""><img class="thumbnail no-margin" src="https://addons.cdn.mozilla.net/user-media/userpics/0/0/45.png?modified=1447324257" alt="Avatar de Usuario"></a></div>
+                                        <div class="add-image"><a href=""><img class="thumbnail no-margin" src="<?php echo $trayectos[$i]['avatar'];?>" alt="Avatar de Usuario"></a></div>
                                     </div>
                                     <!--/.photobox-->
                                     <div class="col-sm-10  col-xs-10  add-desc-box">
                                         <div class="add-details jobs-item">
                                             <h5 class="company-title"><a href=""><?php echo $trayectos[$i]['name']; ?></a></h5>
-                                            <h4 class="job-title"><a href="job-details.html"> <?php echo $trayectos[$i]['viaje']; ?> </a></h4>
+                                            <h4 class="job-title"><a href="job-details.html"> <?php echo $trayectos[$i]['origen'] . " a " . $trayectos[$i]['destino']; ?> </a></h4>
                                             <span class="info-row">
                                                 <span class="item-location"><i class="fa fa-map-marker"></i><?php echo " " . $trayectos[$i]['direc']; ?></span>
                                                 <span class="date"><i class=" icon-clock"> </i><?php echo $trayectos[$i]['hora']; ?></span>
@@ -225,15 +257,19 @@
                                 </div>
                                 <!--/.job-item-->
                             </div>
-                       <?php } ?> <!--Fin de bucle for-->
+                       <?php  
+                       }
+                       } }else{
+                           echo "<center><b><big>" . $notrayecto ."</big></b></center>";
+                       } 
+                       ?> <!--Fin de bucle for y del if-->
                     </div>    
                 </div>    
-                
                 
             </div>
         </div>
     </div>    
-        
+    
     <div class="footer" id="footer">
         <div class="container">
             <ul class=" pull-right navbar-link footer-nav">
