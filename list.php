@@ -39,79 +39,89 @@
     <!-- Código PhP  -->
     <?php
     
+    include 'Trayecto.php';
     date_default_timezone_set('Europe/Madrid');
     $hoy = date("j F, Y, g:i a");
     $year= date("Y");
     $creditos= " Desarrollado por Antonio JiVa";
     
-        //Declarar variable con toda la frase
-        //Recortar variable y que muestre 80 primeros caracteres
-        //mostrar variable y 3 puntos susopensivos
-        $frase = "Un viaje entretenido y seguro, no me gusta correr. Además, pararemos a mitad de camino para tomar una rica tostada de sobrasada, y luego, directos a Huelva.";
-        $fraseCorta= substr($frase,0,80);
-        $fraseCorta= $fraseCorta . "...";
-        
         //Variable de Ciudad e origen pasada por get
         $cOrigen = $_GET['country'];
         $notrayecto = "No se han encontrado trayectos con estos parámetros, Lo sentimos";
-        
-        //Creación de un array para los trayectos
-        $trayectos= array(
-            0=>array(
-                'name' => "Antonio Pérez",
-                'origen' => "Córdoba",
-                'destino' => "Sevilla",
-                'direc' => "Calle Poeta Paredes, 25",
-                'hora' =>"9:00",
-                'precio' =>"10€",
-                'plazas' => "3 plazas",
-                'avatar' => "images/users/6.jpg"
-            ),
-            1=>array(
-                'name' => "Antonio García",
-                'origen' => "Córdoba",
-                'destino' => "Huelva",
-                'direc' => "Calle Gloria Fuertes, 2",
-                'hora' =>"13:00",
-                'precio' =>"15€",
-                'plazas' => "2 plazas",
-                'avatar' => "images/users/2.jpg"
-            ),
-            2=>array(
-                'name' => "Benito Gálvez",
-                'origen' => "Córdoba",
-                'destino' => "Badajoz",
-                'direc' => "Avd. Guerrita, 33",
-                'hora' =>"19:00",
-                'precio' =>"18€",
-                'plazas' => "4 plazas",
-                'avatar' => "images/users/3.jpg"
-            ),
-            3=>array(
-                'name' => "Braulio López",
-                'origen' => "Jaen",
-                'destino' => "Cádiz",
-                'direc' => "Avd. Victoria, 45",
-                'hora' =>"8:00",
-                'precio' =>"13€",
-                'plazas' => "1 plazas",
-                'avatar' => "images/users/7.jpg"
-            ),
-            4=>array(
-                'name' => "Steleo Kontos",
-                'origen' => "Ciudad Real",
-                'destino' => "Vitoria",
-                'direc' => "Calle Tras la puerta, 2",
-                'hora' =>"10:00",
-                'precio' =>"20€",
-                'plazas' => "2 plazas",
-                'avatar' => "images/users/5.jpg"
-            )
-        );
     ?>
     
 </head>
 <body>
+    <?php
+        $trayectoCordobaSevilla = new Trayecto();
+             $trayectoCordobaSevilla->llenaObjeto(
+                "Antonio Pérez",
+                "images/users/6.jpg",
+                "Córdoba",
+                "Sevilla",
+                "Calle Poeta Paredes, 25",
+                "9:00",
+                "10€",
+                "Soy un sevillita típico, sólo se escuchan marchas de semana santa y carnaval, si no te gusta viva sevilla.",
+                "3 plazas",
+                "1468401610"
+        );
+        $trayectoCordobaHuelva = new Trayecto();
+            $trayectoCordobaHuelva->llenaObjeto(
+                "Antonio García",
+                "images/users/2.jpg",
+                "Córdoba",
+                "Huelva",
+                "Calle Gloria Fuertes, 2",
+                "13:00",
+                "15€",
+                "Un viaje entretenido y seguro, no me gusta correr. Además, pararemos a mitad de camino para tomar una rica tostada de sobrasada, y luego, directos a Huelva.",
+                "2 plazas",
+                "1468146010"
+        );
+        $trayectoCordobaBadajoz = new Trayecto();
+             $trayectoCordobaBadajoz->llenaObjeto(
+                "Benito Gálvez",
+                "images/users/3.jpg",
+                "Córdoba",
+                "Badajoz",
+                "Avd. Guerrita, 33",
+                "19:00",
+                "18€",
+                "Me gusta la música electrónica y flamenco a todo volumen, y es lo que hay",
+                "4 plazas",
+                "1468146610"
+         );
+         $trayectoJaenCadiz = new Trayecto();
+             $trayectoJaenCadiz->llenaObjeto(
+                "Braulio López",
+                "images/users/7.jpg",
+                "Jaen",
+                "Cádiz",
+                "Avd. Victoria, 45",
+                "8:00",
+                "13€",
+                "Al primero que abra la boca para decir cualquier pego se queda en la cuneta a hacer auto stop.",
+                "1 plazas",
+                "1467072000"
+         );
+         $trayectoCiudadRealVitoria = new Trayecto();
+             $trayectoCiudadRealVitoria->llenaObjeto(
+                "Steleo Kontos",
+                "images/users/5.jpg",
+                "Ciudad Real",
+                "Vitoria",
+                "Calle Tras la puerta, 2",
+                "10:00",
+                "20€",
+                "Necesito gente con conversación ya que me aburro muchísimo conduciendo y me puedo quedar durmiendo al volante.",
+                "2 plazas",
+                "1467244800"
+         );
+         
+         $trayectos = array($trayectoCordobaHuelva, $trayectoCordobaSevilla, $trayectoCordobaBadajoz, $trayectoJaenCadiz, $trayectoCiudadRealVitoria);
+    ?>
+    
 <div id="wrapper">
     <div class="header">
         <nav class="navbar   navbar-site navbar-default" role="navigation">
@@ -163,13 +173,13 @@
                     <aside>
                         <div class="inner-box">
                             <div class=" list-filter">
-                                <h5 class="list-title"><strong><a href="#"> Fecha de publicación </a></strong></h5>
+                                <h5 class="list-title"><strong><a href="#"> Filtros </a></strong></h5>
 
                                 <div class="filter-date filter-content">
                                     <ul>
                                         <li>
-                                            <input type="radio" value="1" id="posted_1" name="posted">
-                                            <label for="posted_1">24 horas</label>
+                                            <input type="radio" value="precio" id="posted_1" name="precio">
+                                            <label for="posted_1">Precio</label>
                                         </li>
                                         <li>
                                             <input type="radio" value="3" id="posted_3" name="posted">
@@ -185,6 +195,7 @@
                                             <label for="posted_30">30 días</label>
                                         </li>
                                     </ul>
+                                    <button class="btn btn-block btn-primary btn-sm" style="width:40%">Filtrar</button>
                                 </div>
                             </div>
                             <!--/.categories-list-->
@@ -201,7 +212,7 @@
                             <?php
                                 $count=0;
                                 for($i=0;$i<count($trayectos);$i++){
-                                    if($cOrigen == $trayectos[$i]['destino'] || $cOrigen == $trayectos[$i]['origen']){
+                                   if($trayectos[$i]->igualOrigen($cOrigen)){
                                         $count++;
                                     }
                                 }
@@ -220,34 +231,37 @@
                         <?php
                             if($count != 0){
                             for($i=0;$i<count($trayectos);$i++){
-                                if($cOrigen == $trayectos[$i]['origen'] || $cOrigen == $trayectos[$i]['destino']){
+                                if($trayectos[$i]->igualOrigen($cOrigen)){
                         ?>
                             <div class="adds-wrapper jobs-list">
                                 <div class="item-list job-item">
                                     <div class="col-sm-1  col-xs-2 no-padding photobox">
-                                        <div class="add-image"><a href=""><img class="thumbnail no-margin" src="<?php echo $trayectos[$i]['avatar'];?>" alt="Avatar de Usuario"></a></div>
+                                        <div class="add-image"><a href=""><img class="thumbnail no-margin" src="<?php echo $trayectos[$i]->avatar; ?>" alt="Avatar de Usuario"></a></div>
                                     </div>
                                     <!--/.photobox-->
                                     <div class="col-sm-10  col-xs-10  add-desc-box">
                                         <div class="add-details jobs-item">
-                                            <h5 class="company-title"><a href=""><?php echo $trayectos[$i]['name']; ?></a></h5>
-                                            <h4 class="job-title"><a href="job-details.html"> <?php echo $trayectos[$i]['origen'] . " a " . $trayectos[$i]['destino']; ?> </a></h4>
+                                            <h5 class="company-title"><a href=""><?php echo $trayectos[$i]->name; ?></a></h5>
+                                            <h4 class="job-title"><a href="job-details.html"> <?php echo $trayectos[$i]->origen . " a " . $trayectos[$i]->destino; ?> </a></h4>
                                             <span class="info-row">
-                                                <span class="item-location"><i class="fa fa-map-marker"></i><?php echo " " . $trayectos[$i]['direc']; ?></span>
-                                                <span class="date"><i class=" icon-clock"> </i><?php echo $trayectos[$i]['hora']; ?></span>
-                                                <span class=" salary"><i class=" icon-money"> </i> <?php echo $trayectos[$i]['precio']; ?></span>
+                                                <span class="item-location"><i class="fa fa-map-marker"></i><?php echo " " . $trayectos[$i]->direc; ?></span>
+                                                <span class="date"><i class=" icon-clock"> </i><?php echo $trayectos[$i]->hora; ?></span>
+                                                <span class=" salary"><i class=" icon-money"> </i> <?php echo $trayectos[$i]->precio; ?></span>
                                             </span>
                                             <div class="jobs-desc">
-                                                <?php echo "$fraseCorta"; ?>
+                                                <?php echo ($trayectos[$i]->getDescCorta()); ?>
                                             </div>
                                             <div class="job-actions">
                                                 <ul class="list-unstyled list-inline">
                                                     <li>
                                                         <span class="save-job">
-                                                            <span class="fa fa-users"></span><?php echo " " . $trayectos[$i]['plazas']; ?>
+                                                            <span class="fa fa-users"></span><?php echo " " . $trayectos[$i]->plazas; ?>
                                                         </span>
                                                     </li>
                                                 </ul>
+                                                <span class="pull-right">
+                                                    <span class="fa fa-pencil-square-o"></span><?php echo " " . ($trayectos[$i]->fecha()); ?>
+                                                </span>
                                             </div>
                                         </div>
                                     </div>
