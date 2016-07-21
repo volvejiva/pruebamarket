@@ -1,0 +1,28 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+    <title>Comparte Tu Coche - Listado de trayecto</title>
+{% endblock %}
+
+{% block contenido %}
+    {% include "list/filtroCiudad.html.twig" %}
+    
+    <div class="main-container inner-page">
+        <div class="container">
+            <div class="row clearfix">
+                
+                <!-- Columna izquierda para los filtros, rellenamos con Filtros Twig -->
+                <div class="col-sm-3 page-sidebar mobile-filter-sidebar">
+                    {% include "list/filtroFecha.html.twig" %}
+                </div>
+                
+                <!-- Columna central para los trayectos, rellenamos con Trayectos Twig -->
+                <div class="col-sm-9 page-content col-thin-left">
+                    {% include "list/listadoTrayectos.html.twig" %}
+                </div>    
+                
+            </div>
+        </div>
+    </div>
+    
+{% endblock %}
