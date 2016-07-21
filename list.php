@@ -206,7 +206,7 @@
                     1468713600,
                     "9:00",
                     "10€",
-                    "Un viaje entretenido y seguro, no me gusta correr. Además, pararemos a mitad de camino para tomar una rica tostada de sobraasada, y luego, directos a Huelva.",
+                    "Un viaje entretenido y seguro, no me gusta correr. Además, pararemos a mitad de camino para tomar una rica tostada de sobrasada, y luego, directos a Huelva.",
                     "3"
                 );
                 
@@ -273,7 +273,7 @@
                     // Recorremos el array original trayectos para buscar los trayectos a filtrar
                     for($i = 0; $i < count($trayectosFiltradosFecha); $i = $i + 1) {
                         // Comienza nuestro bucle                
-                            if ($trayectosFiltradosFecha[$i]->buscar($_GET["country"])) {
+                            if ($trayectosFiltradosFecha[$i]->tieneOrigen($_GET["country"])) {
                                 $trayectosFiltrados[] = $trayectosFiltradosFecha[$i];
                             }
                         // Termina nuestro bucle
