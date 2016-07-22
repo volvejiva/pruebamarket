@@ -21,3 +21,13 @@
         {% include "index/llama.html.twig" %}
     {% endblock %}
 {% endblock %}
+
+{% block javascript %}
+    {{ parent() }}
+    <!-- include jquery autocomplete plugin  -->
+    <script type="text/javascript" src="assets/plugins/autocomplete/jquery.mockjax.js"></script>
+    <script type="text/javascript" src="assets/plugins/autocomplete/jquery.autocomplete.js"></script>
+    <script type="text/javascript" src="curso-assets/js/ciudades.js"></script>
+    
+    <script type="text/javascript" src="assets/plugins/autocomplete/autocomplete-demo.js"></script>
+{% endblock %}
