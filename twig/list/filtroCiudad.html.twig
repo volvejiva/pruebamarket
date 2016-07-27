@@ -3,11 +3,14 @@
     <div class="container text-center">
         <form name="filter" action="main.php" method="GET">
             <input type="hidden" name="posted" value="{{ posted }}"/>
+             <input type="hidden" name="page" value="list"/>
             <div class="col-sm-3 col-sm-offset-3">
                 <select class="form-control" name="country" id="country">
                     <option {% if country == "" %} selected="selected" {% endif %} value="">Todas las localidades</option>
                     <option {% if country == "Huelva" %} selected="selected" {% endif %} value="Huelva">Huelva</option>
                     <option {% if country == "Córdoba" %} selected="selected" {% endif %} value="Córdoba">Cordoba</option>
+                    <option {% if country == "Málaga" %} selected="selected" {% endif %} value="Málaga">Málaga</option>
+                    <option {% if country == "Cádiz" %} selected="selected" {% endif %} value="Cádiz">Cádiz</option>
                     <option {% if country == "Sevilla" %} selected="selected" {% endif %} value="Sevilla">Sevilla</option>
                 </select>    
             </div>
@@ -16,4 +19,4 @@
             </div>
         </form>
     </div>
-</div> 
+</div>    

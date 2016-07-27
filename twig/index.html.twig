@@ -1,6 +1,33 @@
 {% extends "base.html.twig" %}
 
 {% block title %}
+    <title>Comparte Tu Coche - Bienvenido a la plataforma de compartir coche</title>
+{% endblock %}
+
+{% block contenido %}
+    {% block buscador %}
+        {% include "index/buscador.html.twig" %}
+    {% endblock %}
+    
+    {% block informacion %}
+        {% include "index/informacion.html.twig" %}
+    {% endblock %}
+    
+    {% block recuento %}
+        {% include "index/recuento.html.twig" %}
+    {% endblock %}
+    
+    {% block llama %}
+        {% include "index/llama.html.twig" %}
+    {% endblock %}
+{% endblock %}
+
+{% block javascript %}
     {{ parent() }}
-    - Página Principal
+    <!-- include jquery autocomplete plugin  -->
+    <script type="text/javascript" src="assets/plugins/autocomplete/jquery.mockjax.js"></script>
+    <script type="text/javascript" src="assets/plugins/autocomplete/jquery.autocomplete.js"></script>
+    <script type="text/javascript" src="assets/plugins/autocomplete/ciudades.js"></script>
+    
+    <script type="text/javascript" src="assets/plugins/autocomplete/autocomplete-demo.js"></script>
 {% endblock %}
